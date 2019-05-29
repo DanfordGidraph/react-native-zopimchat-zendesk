@@ -1,6 +1,7 @@
 # react-native-zendesk-zopim-chat
 
 Simple module that allows displaying Zopim Chat from Zendesk for React Native With Support for push notifications. Module works for both Android and iOS
+[NOTE]This package was inspired by [react-native-zendesk-chat](https://github.com/taskrabbit/react-native-zendesk-chat)
 
 `department` is set to `ZDCPreChatDataRequiredEditable`.
 
@@ -51,8 +52,8 @@ react-native link react-native-zendesk-zopim-chat
 
 #### iOS
 1. `npm install react-native-zendesk-zopim-chat --save`
-2. In Xcode, drag and drop `node_modules/react-native-zendesk-zopim-chat/RNZendeskChat.m` and `node_modules/react-native-zendesk-zopim-chat/RNZendeskChat.h` into your project.
-3. Configure `ZDCChat` in `AppDelegate.m`:
+2. In Xcode, drag and drop `node_modules/react-native-zendesk-zopim-chat/RNZopimChatModule.m` and `node_modules/react-native-zendesk-zopim-chat/RNZopimChatModule.h` into your project.
+3. Configure `ZDCChat` in your `AppDelegate.m`:
 
 ```
 #import <ZDCChat/ZDCChat.h>
