@@ -157,7 +157,7 @@ dependencies {
 }
 ```
 3. Open up `android/app/main/java/[...]/MainApplication.java`
-  - Add `import com.zaidiapps.zopimchat.*;` to the imports at the top of the file
+  - Add `com.zaidiapps.zopimchat.zendesk.RNZopimChatPackage;` to the imports at the top of the file
   - Add `new RNZopimChatPackage()` to the list returned by the `getPackages()` method :
 
 ```java
@@ -166,13 +166,16 @@ import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage; 
 // Zopim Chat package
-import com.zaidiapps.zopimchat.zendesk.RNZopimChatPackage;
+import com.zaidiapps.zopimchat.zendesk.RNZopimChatPackage; // <---- Add this line here
 ...
     @Override
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
-                new RNZopimChatPackage()
+                new RNFirebasePackage(),
+                new RNFirebaseMessagingPackage(),
+                new RNFirebaseNotificationsPackage(),
+                new RNZopimChatPackage() // <---- Add this line here
         );
     }
 ```
@@ -181,7 +184,7 @@ import com.zaidiapps.zopimchat.zendesk.RNZopimChatPackage;
 
 ```java
 ...
-  static RNZendeskChatModule rnZendeskChatModule;
+  static RNZopimChatModule rnZopimChatModule; // <--- Instantiate this ZopimChatModule variable here
 
   @Override
   public void onCreate() {
@@ -189,11 +192,114 @@ import com.zaidiapps.zopimchat.zendesk.RNZopimChatPackage;
     SoLoader.init(this, /* native exopackage */ false);
     // Init the chat module from taskrabbit
     ReactApplicationContext reactContext = new ReactApplicationContext(this);
-    rnZendeskChatModule = new RNZendeskChatModule(reactContext);
-    rnZendeskChatModule.init("YOUR_ZENDESK_ACCOUNT_KEY");
+    rnZopimChatModule = new RNZopimChatModule(reactContext); // <--- Initialize the module here
+    rnZopimChatModule.init("YOUR_ZENDESK_ACCOUNT_KEY"); // <---- Set your account key here to initialize the module
   }
   ...
 ```
+
+## Styling
+The default Activity provided by Zendesk for the Chat may not fit into your App Style. 
+
+### Android
+Therefore add the following to your styles.xml in `androud/app/src/main/res/values/styles.xml`
+```xml
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:statusBarColor">@color/theme_color</item>
+    </style>
+...
+
+      <style name="ZopimChatTheme" parent="AppTheme">
+         <!--Chat UI uses the toolbar so no need to show ActionBar-->
+         <item name="windowActionBar">false</item>
+        <!-- Customize chat theme here. -->
+        <item name="colorAccent">@color/theme_color</item>
+        <item name="colorPrimary">@color/theme_color</item>
+        <item name="colorPrimaryDark">@color/statusBarColor</item>
+    </style>
+
+    <style name="no_agents_button">
+        <item name="android:background">@color/theme_color</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!--Customize toolbar that replaces action bar-->
+    <style name="zopim_toolbar">
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    </style>
+
+    <!--Customize where chat widget appears-->
+    <style name="chat_widget" parent="_chat_widget">
+        <item name="anchor">bottom_left</item>
+    </style>
+
+    <!--Customize chat colors-->
+    <color name="chat_bubble_visitor">@color/theme_color</color>
+    
+...
+
+</resources>
+
+```
+Remember to add all the referenced colors to your colors.xml file in `androud/app/src/main/res/values/colors.xml`
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+...
+    <color name="theme_color">#00A19B</color>
+    <color name="colorAccent" >#fff</color>
+    <color name="Black">#000000</color>
+    <color name="White">#ffffff</color>
+    <color name="Transparent">#00000000</color>
+...
+</resources>
+
+```
+There are many more styling options available for Android. [HERE](https://developer.zendesk.com/embeddables/docs/android-chat-sdk/customization)
+
+
+### iOS
+
+```objective-c
+    // loading the chat
+    [[ZDCLoadingView appearance] set...]
+    [[ZDCLoadingErrorView appearance] set...]
+
+    // offline message view
+    [[ZDCOfflineMessageView appearance] set...]
+
+    // chat view
+    [[ZDCChatView appearance] set...]
+    [[ZDCTextEntryView appearance] set...]
+    [[ZDCJoinLeaveCell appearance] set...]
+    [[ZDCSystemTriggerCell appearance] set...]
+    [[ZDCVisitorChatCell appearance] set...]
+    [[ZDCAgentChatCell appearance] set...]
+    [[ZDCChatTimedOutCell appearance] set...]
+    [[ZDCRatingCell appearance] set...]
+    [[ZDCAgentAttachmentCell appearance] set...]
+    [[ZDCVisitorAttachmentCell appearance] set...]
+
+    // chat UI and nav buttons
+    [[ZDCChatUI appearance] set...]
+
+    // chat overlay icon
+    [[ZDCChatOverlay appearance] set...]
+
+    // agent chat avatar
+    [[ZDCChatAvatar appearance] set...]
+
+```
+There are many more styling options available for iOS. [HERE](https://developer.zendesk.com/embeddables/docs/ios-chat-sdk/customization)
 
 ## Usage
 
