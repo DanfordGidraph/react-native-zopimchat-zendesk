@@ -240,7 +240,12 @@ Make sure you use the proper certificate and key in the PEM file for the profile
 
 After the Chat admin confirms they've uploaded the PEM file to the account successfully, enable push notifications as described in the next section.
 
-### Enabling Push Notifications (JavaScript)
+#### Enabling push notifications in your app
+You need to register devices interested in receiving push notifications with Zendesk Chat.
+
+First, go through the [following guide from React Native Firebase](https://rnfirebase.io/docs/v5.x.x/messaging/ios) on implementing an FCM client on Android. After initializing Firebase you will be able to access the device registration token.
+
+### Implementing and Subscribing to Push Notifications (JavaScript)
 Send the user token Zendesk Chat servers through the Chat SDK as follows to register the device:
 ```javascript
 ZendeskChat.setPushToken(token)
