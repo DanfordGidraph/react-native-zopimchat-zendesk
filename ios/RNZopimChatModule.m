@@ -9,12 +9,12 @@
 //  Copyright © 2019 ZaidiMarvels. All rights reserved.
 //
 
-#import "RNZendeskChatPushModule.h"
+#import "RNZopimChatModule.h"
 #import <ZDCChat/ZDCChat.h>
 
-@implementation RNZendeskChatPushModule
+@implementation RNZopimChatModule
 
-RCT_EXPORT_MODULE(RNZendeskChatPushModule);
+RCT_EXPORT_MODULE(RNZopimChatModule);
 
 RCT_EXPORT_METHOD(setPushToken: (NSData*)tokenData) {
 	[ZDCChat setPushToken:tokenData];
