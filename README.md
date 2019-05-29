@@ -199,7 +199,13 @@ import com.zaidiapps.zopimchat.zendesk.RNZopimChatPackage; // <---- Add this lin
 ```
 
 ## Push Notifications
+
 ### Receiving Push Notifications (Firebase)
+#### Adding the server key to Chat
+You must be a Chat admin to upload the server key. If you're not a Chat admin, ask one to do it for you and provide them with the key. For the admin instructions, see 
+[Enabling push notifications for the Chat SDK](https://chat.zendesk.com/hc/en-us/articles/360000456648) for mobile in the Chat Help Center.
+
+
 Zendesk Support notifies an endpoint that you set up when a notification needs to be sent. After that, your service must handle sending the push notification for the end user's device.
 
 You must set up a push notification service/function like on [Firebase Cloud Functions](https://cloud.google.com/functions/docs/quickstart-console) and then register an end user's interest in receiving push notifications on the app side as shown below
@@ -241,9 +247,6 @@ Accept: application/json
 ```
 
 ### Android 
-#### Adding the server key to Chat
-You must be a Chat admin to upload the server key. If you're not a Chat admin, ask one to do it for you and provide them with the key. For the admin instructions, see 
-[Enabling push notifications for the Chat SDK](https://chat.zendesk.com/hc/en-us/articles/360000456648) for mobile in the Chat Help Center.
 
 ##### Note
 If your app is targeting Android O and above, make sure the app properly handles the notification channel for these push notifications.
