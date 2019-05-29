@@ -256,6 +256,7 @@ You need to register devices interested in receiving push notifications with Zen
 
 First, go through the [following guide from React Native Firebase](https://rnfirebase.io/docs/v5.x.x/messaging/android) on implementing an FCM client on Android. After initializing Firebase you will be able to access the device registration token.
 
+
 ### iOS
 #### Generating a combined PEM file
 To generate the combined PEM file, export the APNS SSL certificate and the private key from Keychain Access on your Mac computer.
@@ -536,11 +537,6 @@ class App extends React.Component {
 
   ...
 ```
-
-  ####
-  ##### For Returned Android Notifications See the Documentation [Android](https://developer.zendesk.com/embeddables/docs/android-chat-sdk/push_notifications)
-  ##### For Returned iOS Notifications See the Documentation [iOS](https://developer.zendesk.com/embeddables/docs/ios-chat-sdk/push_notifications)
-  ####
 
 #### Other Component
 
