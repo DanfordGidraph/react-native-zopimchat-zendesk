@@ -1,0 +1,29 @@
+{
+  "name": "react-native-zopimchat-zendesk",
+  "version": "1.0.0",
+  "description": "Zendesk ZopimChat implementation for react native with push notification support",
+  "main": "index.js",
+  "scripts": {
+    "test": "None"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DunMainor/react-native-zopimchat-zendesk.git"
+  },
+  "keywords": [
+    "zendesk",
+    "zopimchat",
+    "push",
+    "notifications",
+    "react-native",
+    "react-native-zendesk",
+    "react-native-zendesk-chat",
+    "react-native-zopim-chat"
+  ],
+  "author": "Dunford Mainor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DunMainor/react-native-zopimchat-zendesk.git/issues"
+  },
+  "homepage": "https://github.com/DunMainor/react-native-zopimchat-zendesk.git#readme"
+}

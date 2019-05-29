@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.zendesk:java-common:1.14@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.zendesk/java-common/1.14/4d9bbc2df0f3ad3b79048c53b03a8a6b85d1a420/java-common-1.14.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.zendesk/java-common/1.14/cc9c8c0dd37d74b05e2e89f73dec1e156ed63906/java-common-1.14-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>

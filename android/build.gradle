@@ -1,0 +1,36 @@
+buildscript {
+  repositories {
+    jcenter()
+	google()
+  }
+
+  dependencies {
+    classpath 'com.android.tools.build:gradle:3.3.2'
+  }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+    }
+}
+
+repositories {
+  mavenCentral()
+  google()
+    maven { url 'https://zendesk.artifactoryonline.com/zendesk/repo' }
+    maven { url 'https://zendesk.jfrog.io/zendesk/repo' }
+}
+
+dependencies {
+    implementation "com.facebook.react:react-native:+"
+    implementation 'com.zopim.android:sdk:1.4.3'
+}
