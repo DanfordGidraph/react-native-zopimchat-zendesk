@@ -1,40 +1,40 @@
-# react-native-zendesk-zopim-chat
+# react-native-zopimchat-zendesk
 
 Simple module that allows displaying Zopim Chat from Zendesk for React Native With Support for push notifications. Module works for both Android and iOS
-[NOTE]This package was inspired by [react-native-zendesk-chat](https://github.com/taskrabbit/react-native-zendesk-chat)
+#### NOTE
+This package was inspired by [react-native-zendesk-chat](https://github.com/taskrabbit/react-native-zendesk-chat)
 
 `department` is set to `ZDCPreChatDataRequiredEditable`.
-
-## Known issues
-
-I could not find how to make the import for iOS work properly since I'm using Cocoapods for Zendesk, if you have a suggestion that would be great.
 
 ## Getting started
 
 ### Further Reading (Important)
 
-Follow the instructions to install the SDK for 
+Follow the instructions and understand how nativeley to install the SDK for. This will assist you in troubleshooting installing & configuring the module
+####
 [iOS](https://developer.zendesk.com/embeddables/docs/ios-chat-sdk/introduction) 
-and 
+####
 [Android](https://developer.zendesk.com/embeddables/docs/android-chat-sdk/introduction).
 
 ## Pre-Reqisites
 
 To use the push notifications features you must first install firebase. I recommend React Native Firebase. [](https://rnfirebase.io)
+####
 [iOS](https://rnfirebase.io/docs/v5.x.x/installation/ios) 
-and 
+####
 [Android](https://rnfirebase.io/docs/v5.x.x/installation/android)
 
 Then go through the installation for enabling notifications with the rnfirebase package 
+####
 [iOS](https://rnfirebase.io/docs/v5.x.x/messaging/ios) 
-and 
+####
 [Android](https://rnfirebase.io/docs/v5.x.x/messaging/android)
 
 ### Installation
 
 Run in terminal
 ```groovy
-    npm i react-native-zendesk-zopim-chat
+    npm i react-native-zopimchat-zendesk
 ```
 
 ### Automatic Integration
@@ -43,7 +43,7 @@ Run in terminal
 
 Run 
 ```groovy
-react-native link react-native-zendesk-zopim-chat
+react-native link react-native-zopimchat-zendesk
 ```
  after which you should be able to use this library on iOS and Android directly
 
@@ -51,8 +51,8 @@ react-native link react-native-zendesk-zopim-chat
 ### Manual Integration
 
 #### iOS
-1. `npm install react-native-zendesk-zopim-chat --save`
-2. In Xcode, drag and drop `node_modules/react-native-zendesk-zopim-chat/RNZopimChatModule.m` and `node_modules/react-native-zendesk-zopim-chat/RNZopimChatModule.h` into your project.
+1. `npm install react-native-zopimchat-zendesk --save`
+2. In Xcode, drag and drop `node_modules/react-native-zopimchat-zendesk/RNZopimChatModule.m` and `node_modules/react-native-zopimchat-zendesk/RNZopimChatModule.h` into your project.
 3. Configure `ZDCChat` in your `AppDelegate.m`:
 
 ```
@@ -63,22 +63,22 @@ react-native link react-native-zendesk-zopim-chat
 
 #### Android
 
-1. Define the `react-native-zendesk-zopim-chat` project in `android/settings.gradle`:
+1. Define the `react-native-zopimchat-zendesk` project in `android/settings.gradle`:
 
 ```groovy
 ...
-include ':react-native-zendesk-zopim-chat'
-project(':react-native-zendesk-zopim-chat').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-zendesk-zopim-chat/android')
+include ':react-native-zopimchat-zendesk'
+project(':react-native-zopimchat-zendesk').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-zopimchat-zendesk/android')
 ```
 
-2. Add the `react-native-zendesk-zopim-chat` as an dependency of your app in `android/app/build.gradle`:
+2. Add the `react-native-zopimchat-zendesk` as an dependency of your app in `android/app/build.gradle`:
 
 ```groovy
 ...
 dependencies {
   ...
   implementation project(':react-native-firebase')
-  implementation project(':react-native-zendesk-zopim-chat') // Add this line
+  implementation project(':react-native-zopimchat-zendesk') // Add this line
 }
 ```
 
@@ -144,7 +144,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.8'
     implementation 'com.google.firebase:firebase-messaging:17.5.0'
 
-    implementation (project(':react-native-zendesk-zopim-chat')){
+    implementation (project(':react-native-zopimchat-zendesk')){
       exclude group: 'com.android.support'
       exclude module: 'appcompat-v7'
       exclude module: 'support-v4'
@@ -343,7 +343,7 @@ class App extends React.Component {
 
 ```javascript
 ...
-import ZendeskChat from 'react-native-zendesk-zopim-chat';
+import ZendeskChat from 'react-native-zopimchat-zendesk';
 ...
 
 ZendeskChat.startChat({
