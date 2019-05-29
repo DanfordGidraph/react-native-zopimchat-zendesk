@@ -372,18 +372,7 @@ class App extends React.Component {
       alert_title = 'alert_title' in data ? data.alert_title : 'Urgent Message'
       alert_message = 'alert_message' in data ? data.alert_message : 'Urgent Message'
       destination = 'destination' in data ? data.destination : null // The destination to navigate to (Zendesk component screen below)
-      notif_type = 'notif_type' in data ? data.notif_type : null // Check if the type is zendesk or other as shown in the docs below
-
-  ```
-  ####
-  ##### For Android
-  [Android](https://developer.zendesk.com/embeddables/docs/android-chat-sdk/push_notifications)
-  ##### For iOS
-  [iOS](https://developer.zendesk.com/embeddables/docs/ios-chat-sdk/push_notifications)
-  ####
-  
-  ```javascript
-      
+      notif_type = 'notif_type' in data ? data.notif_type : null // Check if the type is zendesk or other as shown in the docs below    
     }
 
     if (source === 'app_open') { // Notification opened from app open foreground/background state
@@ -452,6 +441,11 @@ class App extends React.Component {
 
   ...
 ```
+
+  ####
+  ##### For Returned Android Notifications See the Documentation [Android](https://developer.zendesk.com/embeddables/docs/android-chat-sdk/push_notifications)
+  ##### For Returned iOS Notifications See the Documentation [iOS](https://developer.zendesk.com/embeddables/docs/ios-chat-sdk/push_notifications)
+  ####
 
 #### Other Component
 
