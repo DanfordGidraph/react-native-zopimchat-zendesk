@@ -199,6 +199,47 @@ import com.zaidiapps.zopimchat.zendesk.RNZopimChatPackage; // <---- Add this lin
 ```
 
 ## Push Notifications
+### Receiving Push Notifications (Firebase)
+Zendesk Support notifies an endpoint that you set up when a notification needs to be sent. After that, your service must handle sending the push notification for the end user's device.
+
+You must set up a push notification service/function like on [Firebase Cloud Functions](https://cloud.google.com/functions/docs/quickstart-console) and then register an end user's interest in receiving push notifications on the app side as shown below
+
+When Zendesk Support sends a notification to the end user, it sends a **POST** request to the URI set in the app configuration.
+
+#### Account Configuration
+In the Zendesk Support admin interface, select the "Webhook" option in the push notifications combo box in the Customization tab on the Mobile SDK page.
+
+#### Push Notifications Webhook Configuration
+You'll be prompted to provide the webhook URI.
+![settings_push_notifications_webhook](https://raw.githubusercontent.com/zendesk/mobile_sdk_images/master/common/settings_push_notifications_webhook.png)
+
+#### Server Integration
+##### Webhook API
+As explained above, Zendesk Support sends an HTTP **POST** request to the URI of your service. The payload looks like this:
+```
+POST <your_push_notification_callback_uri>
+Content-Type: application/json
+Accept: application/json
+
+{
+  "devices": [
+    {
+      "identifier": "oiuytrdsdfghjk",
+      "type": "ios"
+    },
+    {
+      "identifier": "iuytfrdcvbnmkl",
+      "type": "android"
+    }
+  ],
+  "notification": {
+    "body": "Agent replied something something",
+    "title": "Agent replied",
+    "ticket_id": "5"
+  }
+}
+```
+
 ### Android 
 #### Adding the server key to Chat
 You must be a Chat admin to upload the server key. If you're not a Chat admin, ask one to do it for you and provide them with the key. For the admin instructions, see 
