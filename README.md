@@ -156,7 +156,7 @@ dependencies {
     ...
 }
 ```
-3. Open up `android/app/main/java/[...]/MainApplication.java`
+3. Open up `android/app/src/main/java/[...]/MainApplication.java`
   - Add `com.zaidiapps.zopimchat.zendesk.RNZopimChatPackage;` to the imports at the top of the file
   - Add `new RNZopimChatPackage()` to the list returned by the `getPackages()` method :
 
@@ -180,7 +180,7 @@ import com.zaidiapps.zopimchat.zendesk.RNZopimChatPackage; // <---- Add this lin
     }
 ```
 
-4. Configure `ZopimChat` in `android/app/main/java/[...]/MainApplication.java`
+4. Configure `ZopimChat` in `android/app/src/main/java/[...]/MainApplication.java`
 
 ```java
 ...
@@ -343,7 +343,7 @@ class App extends React.Component {
       .setSubtitle(notif.subtitle)
       .setBody(notif.body)
       .setData(notif.data)
-      .setSound('notif_sound.mp3') // Found in android/app/main/res/raw/
+      .setSound('notif_sound.mp3') // Found in android/app/src/main/src/res/raw/
 
     notification.ios.badge = 10
     notification.android.setAutoCancel(true)
@@ -375,8 +375,12 @@ class App extends React.Component {
       notif_type = 'notif_type' in data ? data.notif_type : null // Check if the type is zendesk or other as shown in the docs below
 
   ```
-[Android](https://developer.zendesk.com/embeddables/docs/android-chat-sdk/push_notifications)
-[iOS](https://developer.zendesk.com/embeddables/docs/ios-chat-sdk/push_notifications)
+  ####
+  ##### For Android
+  [Android](https://developer.zendesk.com/embeddables/docs/android-chat-sdk/push_notifications)
+  ##### For iOS
+  [iOS](https://developer.zendesk.com/embeddables/docs/ios-chat-sdk/push_notifications)
+  ####
   
   ```javascript
       
