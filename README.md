@@ -198,6 +198,54 @@ import com.zaidiapps.zopimchat.zendesk.RNZopimChatPackage; // <---- Add this lin
   ...
 ```
 
+## Push Notifications
+### Android 
+#### Adding the server key to Chat
+You must be a Chat admin to upload the server key. If you're not a Chat admin, ask one to do it for you and provide them with the key. For the admin instructions, see 
+[Enabling push notifications for the Chat SDK](https://chat.zendesk.com/hc/en-us/articles/360000456648) for mobile in the Chat Help Center.
+
+##### Note
+If your app is targeting Android O and above, make sure the app properly handles the notification channel for these push notifications.
+
+After the Chat admin confirms they've uploaded the server key to the account, enable push notifications in your app as described in the next section.
+
+#### Enabling push notifications in your app
+You need to register devices interested in receiving push notifications with Zendesk Chat.
+
+First, go through the [following guide from React Native Firebase](https://rnfirebase.io/docs/v5.x.x/messaging/android) on implementing an FCM client on Android. After initializing Firebase you will be able to access the device registration token.
+
+### iOS
+#### Generating a combined PEM file
+To generate the combined PEM file, export the APNS SSL certificate and the private key from Keychain Access on your Mac computer.
+
+When exporting, don't enter a password when asked about protecting the export.
+
+If you don't know how to combine the certificate PEM and server key PEM, use the following command in Terminal:
+
+``` 
+cat PushAppCert.pem PushAppKey.pem > PushAppCertAndKey.pem
+```
+Then test the combined PEM file against the sandbox Apple server using the following command:
+
+telnet gateway.sandbox.push.apple.com 2195
+Finally, test the connection using the SSL certificate and private key to set up a secure connection:
+
+```
+openssl s_client -connect gateway.sandbox.push.apple.com:2195 -cert PushChatCert.pem -key PushChatKey.pem
+```
+#### Uploading the combined PEM file to Chat
+You must be a Chat admin to upload the PEM file. If you're not a Chat admin, ask one to do it for you and provide them with the PEM file. For the admin instructions, see [Enabling push notifications for the Chat SDK](https://chat.zendesk.com/hc/en-us/articles/360000456648) for mobile in the Chat Help Center.
+
+Make sure you use the proper certificate and key in the PEM file for the profile you're using. For example, *don't use a combined PEM file for staging in the production profile of the app.*
+
+After the Chat admin confirms they've uploaded the PEM file to the account successfully, enable push notifications as described in the next section.
+
+### Enabling Push Notifications (JavaScript)
+Send the user token Zendesk Chat servers through the Chat SDK as follows to register the device:
+```javascript
+ZendeskChat.setPushToken(token)
+```
+
 ## Styling
 The default Activity provided by Zendesk for the Chat may not fit into your App Style. 
 
