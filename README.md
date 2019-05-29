@@ -78,7 +78,11 @@ project(':react-native-zopimchat-zendesk').projectDir = new File(rootProject.pro
 dependencies {
   ...
   implementation project(':react-native-firebase')
-  implementation project(':react-native-zopimchat-zendesk') // Add this line
+  implementation (project(':react-native-zopimchat-zendesk')){ // <--- Add this block
+      exclude group: 'com.android.support'
+      exclude module: 'appcompat-v7'
+      exclude module: 'support-v4'
+    } 
 }
 ```
 
