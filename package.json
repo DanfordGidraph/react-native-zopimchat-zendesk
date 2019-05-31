@@ -1,6 +1,6 @@
 {
   "name": "react-native-zopimchat-zendesk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple module that allows displaying Zopim Chat from Zendesk for React Native With Support for push notifications. Module works for both Android and iOS",
   "main": "index.js",
   "scripts": {

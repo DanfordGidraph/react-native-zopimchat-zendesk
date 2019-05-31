@@ -217,7 +217,7 @@ You'll be prompted to provide the webhook URI.
 #### Server Integration
 ##### Webhook API
 As explained above, Zendesk Support sends an HTTP **POST** request to the URI of your service. The payload looks like this:
-```
+```javascript
 POST <your_push_notification_callback_uri>
 Content-Type: application/json
 Accept: application/json
@@ -225,20 +225,104 @@ Accept: application/json
 {
   "devices": [
     {
-      "identifier": "oiuytrdsdfghjk",
+      "identifier": '<YOUR_DEVICE_FCM_TOKEN>', // a Token that you sent to Zendesk as shown in the sections below
       "type": "ios"
     },
     {
-      "identifier": "iuytfrdcvbnmkl",
+      "identifier": '<YOUR_DEVICE_FCM_TOKEN>',
       "type": "android"
     }
   ],
   "notification": {
     "body": "Agent replied something something",
     "title": "Agent replied",
-    "ticket_id": "5"
+    "ticket_id": "5" //Use this number in the FCF function data payload to resume to the correct chat
   }
 }
+```
+
+#### Firebase Cloud Functions 
+The POST request sent above can be used to trigger a firebase function which in turn then sends a notification to your device. Below is a sample bare-bones example of a firebase cloud function that can receive this POST request and use it to generate the notification in the correct FCM Format. Feel free to use it as a basis to build upon
+
+```javascript
+const functions = require('firebase-functions')
+const admin = require('firebase-admin')
+const cors = require('cors')({origin: true})
+...
+// The admin_service_account file can be downloaded from your project's cloud console. See https://support.google.com/a/answer/7378726?hl=en
+let serviceAccount = require("./fb_admin_service_account.json")
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://<YOUR_APP_ID>.firebaseio.com"
+})
+
+exports.sendZendeskPushNotification = functions.https.onRequest((request, response) => {
+    cors(request, response, () => {})
+    if(request.method !== "POST"){
+        response.status(400).send('Please send a POST request')
+        return
+    }
+    let data = request.body
+    let devices = 'devices' in data? data.devices: []
+    let notification = 'notification' in data? data.notification : []
+    // Send the message to each of the devices that have an identifier. i.e an FCM Token that you sent to Zendesk as shown in the sections below
+    let messages = devices.map((device)=>{
+        device_token = device.identifier
+        let message = {
+          // This is the payload object that your OS uses to create/render a notification/headsup
+            notification:{
+                title: notification.title,
+                body: notification.body
+            },
+              // This is the payload key-value pair that your device receives as notification.data
+            data : {
+                ticket_id: notification.body,
+                notif_type:'alert',
+                alert_title: notification.title ,
+                alert_message: notification.body ,
+                alert_button_text: 'OK, Working' ,
+                destination: 'Home' ,
+            },
+            token: device_token
+        }
+        return message
+    })
+
+    return messages.map(async (message)=>{
+        try {
+            const admin_response = await admin.messaging().send(message);
+            // admin_response is a message ID string.
+            console.log('SZPN => Successfully sent zendesk notification to user:', admin_response);
+            response.status(200).send('Successfully sent zendesk notification to user')
+            return true;
+        }
+        catch (err) {
+            console.log('SZPN => Error sending zendesk notification to user:', err)
+            response.status(400).send('Error sending zendesk notification to user')
+            return false;
+        }
+    })
+
+  })
+```
+##### Invoking your notification function (REST)
+Invoking this function for testing is as simple as using a REST API client like [Postman](https://www.getpostman.com/downloads/). Below is a sample
+##### NOTE 
+As explained above, Zendesk Support sends an HTTP **POST** request to the URI of your service automatically as shown above. This is for testing purposes before deployment
+##### Testing With JavaScript
+```javascript
+const request = require('request')
+const function_url = 'https://<YOUR_FUNCTION_REGION>-<YOUR_APPLICATION_ID>.cloudfunctions.net/sendZendeskPushNotification'
+request(function_url, (error, response, body) => {
+  if (!error && response.statusCode == 200) {
+    console.log(body) // Show the message : Successfully sent zendesk notification to user
+  }
+  else {
+    console.log("Error "+response.statusCode)
+    console.log(body) // Show the message : Error sending zendesk notification to user
+  }
+})
+
 ```
 
 ### Android 
