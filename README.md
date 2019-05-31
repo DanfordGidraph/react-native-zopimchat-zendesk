@@ -82,6 +82,7 @@ react-native link react-native-zopimchat-zendesk
             end    
           end
         end
+      end
     ```
 
 2. In Xcode, drag and drop `node_modules/react-native-zopimchat-zendesk/RNZopimChatModule.m` and `node_modules/react-native-zopimchat-zendesk/RNZopimChatModule.h` into your project.
@@ -93,12 +94,14 @@ react-native link react-native-zopimchat-zendesk
 [ZDCChat initializeWithAccountKey:@"YOUR_ZENDESK_ACCOUNT_KEY"];
 ```
 
-To receive notifications on iOS you must configure your APNs mapping to FCM. Please follow the instructions on the [Firebase docs](https://firebase.google.com/docs/cloud-messaging/ios/certs) on how to setup your APN certificates with FCM.
-
-4. Enable Capabilities
-In Xcode, enable the following capabilities:
+4. Enable Capabilities In Xcode:
 1) Push Notifications
 2) Background modes > Remote notifications
+
+##### NOTE
+To receive notifications on iOS you must configure your APNs mapping to FCM. Please follow the instructions on the [Firebase docs](https://firebase.google.com/docs/cloud-messaging/ios/certs) on how to setup your APN certificates with FCM.
+
+
 
 #### Android
 
