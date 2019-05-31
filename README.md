@@ -51,7 +51,38 @@ react-native link react-native-zopimchat-zendesk
 ### Manual Integration (Recommended)
 
 #### iOS
-1. `npm install react-native-zopimchat-zendesk --save`
+##### Using CocoaPods (Best Approach)
+``` If the CocoaPods package manager is new to you, please first review its [installation guide](https://guides.cocoapods.org/using/getting-started.html) ```
+
+1. Setup your Podfile (found at ios/Podfile as below, replacing all references to _YOUR_PROJECT_TARGET_ with your project target (it's the same as project name by default).
+    ```pod
+      # Uncomment this line to define a global platform for your project
+      # platform :ios, '9.0'
+
+      target '_YOUR_PROJECT_TARGET_' do # <--- Replace with your project name
+        # use_frameworks!
+        rn_path = '../node_modules/react-native'
+        ...
+        pod 'ZendeskSDK' # <--- Add this line to your project pod file
+        ...
+
+        post_install do |installer|
+          installer.pods_project.targets.each do |target|        
+            # The following is needed to ensure the "archive" step works in XCode.
+            # It removes React & Yoga from the Pods project, as it is already included in the main project.
+            # Without this, you'd see errors when you archive like:
+            # "Multiple commands produce ... libReact.a"
+            # "Multiple commands produce ... libyoga.a"
+            
+            targets_to_ignore = %w(React yoga)
+            
+            if targets_to_ignore.include? target.name
+              target.remove_from_project
+            end    
+          end
+        end
+    ```
+
 2. In Xcode, drag and drop `node_modules/react-native-zopimchat-zendesk/RNZopimChatModule.m` and `node_modules/react-native-zopimchat-zendesk/RNZopimChatModule.h` into your project.
 3. Configure `ZDCChat` in your `AppDelegate.m`:
 
