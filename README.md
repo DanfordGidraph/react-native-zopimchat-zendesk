@@ -63,6 +63,8 @@ react-native link react-native-zopimchat-zendesk
         # use_frameworks!
         rn_path = '../node_modules/react-native'
         ...
+        pod 'Firebase/Core'
+        pod 'Firebase/Messaging'
         pod 'ZendeskSDK' # <--- Add this line to your project pod file
         ...
 
@@ -91,6 +93,13 @@ react-native link react-native-zopimchat-zendesk
 
 [ZDCChat initializeWithAccountKey:@"YOUR_ZENDESK_ACCOUNT_KEY"];
 ```
+
+To receive notifications on iOS you must configure your APNs mapping to FCM. Please follow the instructions on the [Firebase docs](https://firebase.google.com/docs/cloud-messaging/ios/certs) on how to setup your APN certificates with FCM.
+
+4. Enable Capabilities
+In Xcode, enable the following capabilities:
+1) Push Notifications
+2) Background modes > Remote notifications
 
 #### Android
 
