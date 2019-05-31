@@ -52,8 +52,7 @@ react-native link react-native-zopimchat-zendesk
 
 #### iOS
 ##### Using CocoaPods (Best Approach)
-``` If the CocoaPods package manager is new to you, please first review its [installation guide](https://guides.cocoapods.org/using/getting-started.html) ```
-
+*If the CocoaPods package manager is new to you, please first review its [installation guide](https://guides.cocoapods.org/using/getting-started.html)*
 1. Setup your Podfile (found at ios/Podfile as below, replacing all references to _YOUR_PROJECT_TARGET_ with your project target (it's the same as project name by default).
     ```pod
       # Uncomment this line to define a global platform for your project
