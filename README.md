@@ -1,4 +1,4 @@
-# react-native-zopimchat-zendesk
+# [react-native-zopimchat-zendesk](https://www.npmjs.com/package/react-native-zopimchat-zendesk)
 
 Simple module that allows displaying Zopim Chat from Zendesk for React Native With Support for push notifications. Module works for both Android and iOS
 #### NOTE
@@ -37,7 +37,7 @@ Run in terminal
     npm i react-native-zopimchat-zendesk
 ```
 
-### Automatic Integration
+### Automatic Integration (Not Recommended)
 
 ### Using React Native Link
 
@@ -48,7 +48,7 @@ react-native link react-native-zopimchat-zendesk
  after which you should be able to use this library on iOS and Android directly
 
 
-### Manual Integration
+### Manual Integration (Recommended)
 
 #### iOS
 1. `npm install react-native-zopimchat-zendesk --save`
@@ -308,7 +308,7 @@ exports.sendZendeskPushNotification = functions.https.onRequest((request, respon
 ##### Invoking your notification function (REST)
 Invoking this function for testing is as simple as using a REST API client like [Postman](https://www.getpostman.com/downloads/). Below is a sample
 ##### NOTE 
-As explained above, Zendesk Support sends an HTTP **POST** request to the URI of your service automatically as shown above. This is for testing purposes before deployment
+As explained above, Zendesk Support sends an HTTP **POST** request to the URI of your service automatically as shown in the Webhook Section. This is for testing purposes before deployment
 ##### Testing With JavaScript
 ```javascript
 const request = require('request')
