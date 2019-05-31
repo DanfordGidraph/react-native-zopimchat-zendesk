@@ -276,7 +276,7 @@ exports.sendZendeskPushNotification = functions.https.onRequest((request, respon
             },
               // This is the payload key-value pair that your device receives as notification.data
             data : {
-                ticket_id: notification.body,
+                ticket_id: notification.ticket_id,
                 notif_type:'alert',
                 alert_title: notification.title ,
                 alert_message: notification.body ,
