@@ -2,17 +2,20 @@ package com.zaidiapps.zopimchat.zendesk;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
+import com.zendesk.sdk.model.push.PushRegistrationResponse;
+import com.zendesk.sdk.network.impl.ZendeskConfig;
+import com.zendesk.service.ErrorResponse;
+import com.zendesk.service.ZendeskCallback;
 import com.zopim.android.sdk.api.ZopimChat;
 import com.zopim.android.sdk.model.VisitorInfo;
 import com.zopim.android.sdk.prechat.ZopimChatActivity;
-
-import java.lang.String;
 
 public class RNZopimChatModule extends ReactContextBaseJavaModule {
     private ReactContext mReactContext;
@@ -26,6 +29,23 @@ public class RNZopimChatModule extends ReactContextBaseJavaModule {
     public String getName() {
         return "RNZopimChatModule";
     }
+
+    public void registerDeviceForPushNotifications(String fcm_token){
+        final String TAG = "RNZopimChatModule";
+        ZendeskConfig.INSTANCE.enablePushWithIdentifier(fcm_token, new ZendeskCallback<PushRegistrationResponse>() {
+            @Override
+            public void onSuccess(PushRegistrationResponse pushRegistrationResponse) {
+                Log.d(TAG, "onSuccess: pushRegistrationResponse");
+            }
+            @Override
+            public void onError(ErrorResponse errorResponse) {
+                Log.d(TAG, "onError: ",(Throwable) errorResponse);
+            }
+        });
+
+    }
+
+
 
     @ReactMethod
     public void setVisitorInfo(ReadableMap options) {
@@ -53,7 +73,7 @@ public class RNZopimChatModule extends ReactContextBaseJavaModule {
 	
 	@ReactMethod
 	public void setPushToken(String token){
-		ZopimChat.setPushToken(token);
+        registerDeviceForPushNotifications(token);
 	}
 
     @ReactMethod
